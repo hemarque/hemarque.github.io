@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Helder on GitHub</title>
+  
+  <script src="http://www.google.com/jsapi"></script>
+  <script>
+    google.load("jquery", "1");
+    google.setOnLoadCallback(function() {
+      
+      getRepos('hemarque', function(repos) {
+        if (!repos.length) return;
+
+        $('#repos').replaceWith('<dl id="repos"></dl>');
+        repos.each(function() {
+          var escapedDesc = $('<div/>').text(this.description).html();
+          $('#repos').append(
+            '<dt><a href="'+this.url+'">'+this.name+'</a> ('+this.watchers+')</dt>'+
+            '<dd>'+escapedDesc+'</dd>'
+          );
+        });
+      });
+
+      function getRepos(username, callback) {
+        $.getJSON('http://github.com/api/v1/json/'+username+'?callback=?', function(data) {
+          var repos = data.user.repositories;
+          repos = $.grep(repos, function(r) { return !r.fork });
+          repos.sort(function(a, b) { return b.watchers - a.watchers });
+          repos = $(repos);
+          callback(repos);
+        });
+      }
+    });
+    
+  </script>
+  
+  <style>
+    body {
+      background: #FFF;
+      color: #000;
+      font: 14px "Helvetica", Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      margin: 0;
+    }
+    h2 {
+      margin: 35px 0 0 0;
+    }
+    dt {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    dd {
+      margin: 5px 0 15px 0;
+    }
+    dl#repos dd {
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Helder</h1>
+  
+  <h2>Elsewhere</h2>
+  <dl>
+    <dt>Twitter</dt>
+    <dd><a href="http://twitter.com/helderdoliveira">helderdoliveira</a></dd>
+    <dt>Linkedin</dt>
+    <dd><a href="https://www.linkedin.com/in/hemarque/">hemarque</a></dd>
+    <dt>Email</dt>
+    <dd><a href="mailto:hemarque@gmail.com">hemarque@gmail.com</a></dd>
+  </dl>
+  
+  <h2>Repos</h2>
+  <p id="repos">See <a href="http://github.com/hemarque">github.com/hemarque</a>.</p>
+
+</body>
+</html>
