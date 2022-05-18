@@ -1,84 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>Helder on GitHub</title>
-  
-  <script src="http://www.google.com/jsapi"></script>
-  <script>
-    google.load("jquery", "1");
-    google.setOnLoadCallback(function() {
-      
-      getRepos('hemarque', function(repos) {
-        if (!repos.length) return;
 
-        $('#repos').replaceWith('<dl id="repos"></dl>');
-        repos.each(function() {
-          var escapedDesc = $('<div/>').text(this.description).html();
-          $('#repos').append(
-            '<dt><a href="'+this.url+'">'+this.name+'</a> ('+this.watchers+')</dt>'+
-            '<dd>'+escapedDesc+'</dd>'
-          );
-        });
-      });
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Henrik Nyh</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="application.css">
+  </head>
+  <body>
+    <div class="outer-container">
+      <div class="inner-container">
+        <img src="images/bg_skate - 600x270.jpg" alt="" >
 
-      function getRepos(username, callback) {
-        $.getJSON('http://github.com/api/v1/json/'+username+'?callback=?', function(data) {
-          var repos = data.user.repositories;
-          repos = $.grep(repos, function(r) { return !r.fork });
-          repos.sort(function(a, b) { return b.watchers - a.watchers });
-          repos = $(repos);
-          callback(repos);
-        });
-      }
-    });
-    
-  </script>
-  
-  <style>
-    body {
-      background: #FFF;
-      color: #000;
-      font: 14px "Helvetica", Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      margin: 0;
-    }
-    h2 {
-      margin: 35px 0 0 0;
-    }
-    dt {
-      font-weight: bold;
-      font-size: 16px;
-    }
-    dd {
-      margin: 5px 0 15px 0;
-    }
-    dl#repos dd {
-      font-style: italic;
-    }
-  </style>
-</head>
+        <p>Hello, I'm <b>Helder</b>, a Venezuelan-Portuguese Informatic Engineer.</p>
 
-<body>
+        <p>
+          I live in Madrid, Spain.
+        </p>
 
-  <h1>Helder</h1>
-  
-  <h2>Elsewhere</h2>
-  <dl>
-    <dt>Twitter</dt>
-    <dd><a href="http://twitter.com/helderdoliveira">helderdoliveira</a></dd>
-    <dt>Linkedin</dt>
-    <dd><a href="https://www.linkedin.com/in/hemarque/">hemarque</a></dd>
-    <dt>Email</dt>
-    <dd><a href="mailto:hemarque@gmail.com">hemarque@gmail.com</a></dd>
-  </dl>
-  
-  <h2>Repos</h2>
-  <p id="repos">See <a href="http://github.com/hemarque">github.com/hemarque</a>.</p>
+        <p>
+          I write a lot at <a href="https://twitter.com/HelderDOliveira">Twitter</a> and work at <a href="https://www.zooplus.com/">Zooplus</a>.
+        </p>
 
-</body>
+        <p>
+          Contact me at <a href="https://twitter.com/HelderDOliveira"><span class="at">@</span>helderdoliveira</a>
+          or
+          <a href="mailto:hemarque@gmail.com">hemarque<span class="at">@</span>gmail.com</a>.
+        </p>
+
+        <ul class="elsewhere">
+          <li class="elsewhere__item"><a href="/uses">Uses</a></li>
+          <li class="elsewhere__item"><a href="https://github.com/hemarque">GitHub</a></li>
+          <li class="elsewhere__item"><a href="https://twitter.com/HelderDOliveira">Twitter</a></li>
+        </ul>
+      </div>
+    </div>
+  </body>
 </html>
